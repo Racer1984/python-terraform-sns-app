@@ -1,0 +1,14 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Publish to SNS topic</h1>
+<form action="" method="post" name="index">
+    {{form.hidden_tag()}}
+    <p>
+        Please enter your message to send:<br>
+        {{form.msg(size=100)}}<br>
+    </p>
+    <p><input type="submit" value="Send"></p>
+</form>
+{% endblock %}
