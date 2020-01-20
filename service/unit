@@ -1,0 +1,11 @@
+[Unit]
+Description=Python Flask SNS AWS Sender
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3.6 /opt/sns-app/run.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
