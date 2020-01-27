@@ -12,9 +12,9 @@ def index():
     form = SendForm()
     if form.validate_on_submit():
         flash('You just sent "' + form.msg.data + '" to AWS SNS')
-        sns = create_client()
+        sns, ssm = create_clients()
         response = sns.publish(
-            TopicArn = 'arn:aws:sns:us-east-2:591559526277:test-sns',
+            TopicArn = ssm.get_parameter(Name='topic-arn', WithDecryption=False),
             Message = form.msg.data
         )
         return redirect('/index')
