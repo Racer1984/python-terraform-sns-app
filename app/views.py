@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect
 from app import app
 from .forms import SendForm
-from .PySNS import create_client
+from .PySNS import create_clients
 
 @app.route('/')
 def redir():
