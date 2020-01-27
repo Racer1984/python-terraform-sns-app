@@ -14,7 +14,7 @@ def index():
         flash('You just sent "' + form.msg.data + '" to AWS SNS')
         sns, ssm = create_clients()
         response = sns.publish(
-            TopicArn = ssm.get_parameter(Name='topic-arn', WithDecryption=False),
+            TopicArn = ssm.get_parameter(Name='topic-arn', WithDecryption=False)['Parameter']['Value'],
             Message = form.msg.data
         )
         return redirect('/index')
