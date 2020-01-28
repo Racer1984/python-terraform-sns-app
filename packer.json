@@ -1,0 +1,54 @@
+{
+        "_comment": "Packer Template for AMI",
+        "variables": {
+                "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+                "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+        },
+        "builders": [{
+                "type": "amazon-ebs",
+                "access_key": "{{user `aws_access_key`}}",
+                "secret_key": "{{user `aws_secret_key`}}",
+                "region": "us-east-2",
+                "profile": "sns-profile",
+                "source_ami": "ami-0d5d9d301c853a04a",
+                "instance_type": "t2.micro",
+                "ssh_username": "ubuntu",
+                "ami_name": "sns-app-instance-{{isotime \"2006-01-02 03-04-05\"}}"
+        }],
+        "provisioners": [{
+                        "type": "shell",
+                        "inline": [
+                                "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+                        ]
+                },
+                {
+                        "type": "shell",
+                        "inline": [
+                                "sudo mkdir /opt/sns-app",
+                                "sudo chown -R ubuntu:ubuntu /opt/sns-app",
+                                "sudo apt-get clean all",
+                                "sudo apt-get update",
+                                "sudo apt-get -y install python3-pip",
+                                "sudo -H pip3 install boto3",
+                                "sudo -H pip3 install flask",
+                                "sudo -H pip3 install flask_wtf"
+                        ],
+                        "pause_before": "10s"
+                },
+                {
+                        "type": "file",
+                        "source": "/var/lib/jenkins/workspace/sns-app-deploy/",
+                        "destination": "/opt/sns-app"
+                },
+                {
+                        "type": "shell",
+                        "inline": [
+                                "chmod +x /opt/sns-app/run.py",
+                                "sudo cp /opt/sns-app/service/pysns.service /lib/systemd/system/pysns.service",
+                                "sudo chmod 644 /lib/systemd/system/pysns.service",
+                                "sudo systemctl enable pysns",
+                                "sudo systemctl start pysns"
+                        ]
+                }
+        ]
+}
