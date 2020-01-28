@@ -1,4 +1,4 @@
-resource "aws_sns_topic" "tf_aws_sns_topic_with_subscription" {
+resource "aws_sns_topic" "topic_with_subscription" {
   name = var.sns_topic_name
   provisioner "local-exec" {
     command = "sh sns_subscription.sh"
@@ -14,5 +14,5 @@ resource "aws_sns_topic" "tf_aws_sns_topic_with_subscription" {
 resource "aws_ssm_parameter" "topic-arn" {
   name = "topic-arn"
   type = "String"
-  value = aws_sns_topic.tf_aws_sns_topic_with_subscription.arn
+  value = aws_sns_topic.topic_with_subscription.arn
 }

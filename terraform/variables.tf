@@ -35,7 +35,7 @@ variable "private_numbers" {
 variable "sns_topic_name" {
   type = string
   description = "SNS topic name"
-  default = "p1_messages"
+  default = "test-sns"
 }
 
 variable "sns_subscription_email_address_list" {
