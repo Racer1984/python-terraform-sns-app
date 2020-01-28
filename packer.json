@@ -24,8 +24,8 @@
                 {
                         "type": "shell",
                         "inline": [
-                                "sudo mkdir /opt/sns-app",
-                                "sudo chown -R ubuntu:ubuntu /opt/sns-app",
+                                "sudo mkdir /opt/flask-app",
+                                "sudo chown -R ubuntu:ubuntu /opt/flask-app",
                                 "sudo apt-get clean all",
                                 "sudo apt-get update",
                                 "sudo apt-get -y install python3-pip",
@@ -37,14 +37,14 @@
                 },
                 {
                         "type": "file",
-                        "source": "/var/lib/jenkins/workspace/sns-app-deploy/",
-                        "destination": "/opt/sns-app"
+                        "source": "flask-app",
+                        "destination": "/opt/flask-app"
                 },
                 {
                         "type": "shell",
                         "inline": [
-                                "chmod +x /opt/sns-app/run.py",
-                                "sudo cp /opt/sns-app/service/pysns.service /lib/systemd/system/pysns.service",
+                                "chmod +x /opt/flask-app/run.py",
+                                "sudo cp /opt/flask-app/service/pysns.service /lib/systemd/system/pysns.service",
                                 "sudo chmod 644 /lib/systemd/system/pysns.service",
                                 "sudo systemctl enable pysns",
                                 "sudo systemctl start pysns"

@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3.6 /opt/sns-app/run.py
+ExecStart=/usr/bin/python3.6 /opt/flask-app/run.py
 Restart=always
 
 [Install]
