@@ -1,3 +1,7 @@
+variable "profile" {
+  type        = string
+  description = "The profile name holding AWS credentials"
+}
 variable "region" {
   type        = string
   description = "The region for the infrastructure deployment"
@@ -26,4 +30,16 @@ variable "private_numbers" {
     "az" = "us-east-2c"
     "network" = 2
   }
+}
+
+variable "sns_topic_name" {
+  type = string
+  description = "SNS topic name"
+  default = "p1_messages"
+}
+
+variable "sns_subscription_email_address_list" {
+  type = string
+  description = "List of email addresses as a string, space is separator"
+  default = "kir_rus@mail.ru kirill.rusin@gmail.com"
 }

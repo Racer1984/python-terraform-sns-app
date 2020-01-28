@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "sns-app-launchconfig" {
   name_prefix          = "sns-app-launchconfig-"
-  image_id             = "ami-0cc4469d796e1726f"
+  image_id             = var.BAKED_AMI
   instance_type        = "t2.micro"
   security_groups      = [aws_security_group.allow_any_ssh_and_www_to_ec2.id]
 
