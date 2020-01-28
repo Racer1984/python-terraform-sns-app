@@ -37,7 +37,7 @@
                 },
                 {
                         "type": "file",
-                        "source": "/var/lib/jenkins/workspace/sns-app-deploy/flask-app",
+                        "source": "flask-app/",
                         "destination": "/opt/flask-app"
                 },
                 {
