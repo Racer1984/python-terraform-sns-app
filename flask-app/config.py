@@ -1,2 +1,2 @@
 CSRF_ENABLED = True
-SECRET_KEY = 'fhjI4xdfefdgfS9N5'
+SECRET_KEY = 'fhjI4xdpefdgfS9N5'
