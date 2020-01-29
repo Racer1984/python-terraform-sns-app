@@ -1,9 +1,3 @@
-provider "aws" {
-  profile = var.profile
-  shared_credentials_file = "/home/ubuntu/.aws/credentials"
-  region = var.region
-}
-
 resource "aws_vpc" "pysns" {
   cidr_block       = var.vpc_cidr
   instance_tenancy = "default"
@@ -49,10 +43,6 @@ resource "aws_nat_gateway" "nat_gw" {
     allocation_id = aws_eip.eip.id
     subnet_id     = aws_subnet.public_net.id
     depends_on    = [aws_internet_gateway.internet_gw]
-}
-
-output "NAT_GW_IP" {
-  value = aws_eip.eip.public_ip
 }
 
 resource "aws_route_table" "public-rt" {
