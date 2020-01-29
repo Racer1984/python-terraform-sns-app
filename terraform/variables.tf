@@ -3,15 +3,11 @@ variable "profile" {
   description = "The profile name holding AWS credentials"
   default     = "sns-profile"
 }
+
 variable "region" {
   type        = string
   description = "The region for the infrastructure deployment"
   default     = "us-east-2"
-}
-variable "image_id" {
-  type        = string
-  description = "The id of the machine image (AMI) to use for instances"
-  defaut      = "ami-05c4c8a3a43951b1d"
 }
 
 variable "vpc_cidr" {
