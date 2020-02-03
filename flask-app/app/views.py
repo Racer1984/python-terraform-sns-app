@@ -17,4 +17,4 @@ def index():
         sns, ssm = create_clients()
         sns.publish(TopicArn=ssm.get_parameter(Name='topic-arn', WithDecryption=False)['Parameter']['Value'], Message=form.msg.data)
         return redirect('/index')
-    return render_template('index.html', title='Send Message to SNS', form=form)
+    return render_template('index.html', title='Send Message AWS to SNS', form=form)
